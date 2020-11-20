@@ -1,2 +1,3 @@
 feedparser
 TextBlob
+html2text
