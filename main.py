@@ -30,15 +30,13 @@ def writeToCSV(entries):
     writer = csv.DictWriter(csvfile, fieldnames = field_names, extrasaction='ignore') 
     writer.writerows(entries) 
 
-writeHeaderToCSV()
-rss_urls = ["https://www.oh-soyummy.com/rss.xml", "https://mmm-yoso.typepad.com/mmmyoso/atom.xml", "https://classicsandiego.com/feed/", "https://sandiegofoodfinds.com/category/restaurant-reviews/feed/", "http://bitesandiego.com/feed/"] 
-for rss_url in rss_urls:
-  d = feedparser.parse( rss_url )
-  entries = map(getParsedItemFunction(d.feed.title), d.entries)
-  writeToCSV(entries)
-
-
-
+def scrape_rss_feeds():
+  writeHeaderToCSV()
+  rss_urls = ["https://www.oh-soyummy.com/rss.xml", "https://mmm-yoso.typepad.com/mmmyoso/atom.xml", "https://classicsandiego.com/feed/", "https://sandiegofoodfinds.com/category/restaurant-reviews/feed/", "http://bitesandiego.com/feed/", "http://www.sandiegofoodstuff.com/feeds/posts/default?alt=rss"] 
+  for rss_url in rss_urls:
+    d = feedparser.parse( rss_url )
+    entries = map(getParsedItemFunction(d.feed.title), d.entries)
+    writeToCSV(entries)
 
 
 # for item in d.entries:
